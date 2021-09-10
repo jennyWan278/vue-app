@@ -1,11 +1,16 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import user from "./user";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+interface State {
+  user: typeof user.state;
+}
+
+type GettersFunscs = typeof user.getters;
+export default new Vuex.Store<State>({
+  modules: {
+    user,
+  },
 });

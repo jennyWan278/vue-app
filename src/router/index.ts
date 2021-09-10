@@ -5,19 +5,29 @@ import Home from "../views/Home.vue";
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
+  // 登录
+  {
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/login.vue"),
+  },
+  // 首页
   {
     path: "/",
     name: "Home",
     component: Home,
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    meta: {
+      auth: "login",
+    },
+    children: [
+      {
+        path: "/about",
+        name: "About",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/About.vue"),
+      },
+    ],
   },
 ];
 
@@ -25,6 +35,23 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+const loginUrl = "/login";
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.auth === "login")) {
+    if (!userService.isLogin()) {
+      next({
+        path: loginUrl,
+        // query: { redirect: to.fullPath }
+      });
+    } else {
+      next();
+    }
+  } else {
+    next(); // 确保一定要调用 next()
+  }
 });
 
 export default router;
