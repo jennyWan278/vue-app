@@ -10,7 +10,7 @@ const routes: Array<RouteConfig> = [
     path: "/login",
     name: "login",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/login.vue"),
+      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
   },
   // 首页
   {
@@ -37,21 +37,21 @@ const router = new VueRouter({
   routes,
 });
 
-const loginUrl = "/login";
+// const loginUrl = "/login";
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.auth === "login")) {
-    if (!userService.isLogin()) {
-      next({
-        path: loginUrl,
-        // query: { redirect: to.fullPath }
-      });
-    } else {
-      next();
-    }
-  } else {
-    next(); // 确保一定要调用 next()
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some((record) => record.meta.auth === "login")) {
+//     if (!userService.isLogin()) {
+//       next({
+//         path: loginUrl,
+//         // query: { redirect: to.fullPath }
+//       });
+//     } else {
+//       next();
+//     }
+//   } else {
+//     next(); // 确保一定要调用 next()
+//   }
+// });
 
 export default router;

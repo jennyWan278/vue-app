@@ -1,10 +1,5 @@
 <template>
-  <!-- <Layout></Layout> -->
-  <div class="contnet">
-    <div class="content-detail">
-      内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-    </div>
-  </div>
+  <Layout></Layout>
 </template>
 
 <script lang="ts">
@@ -16,7 +11,7 @@ export default Vue.extend({
   name: "Home",
 
   components: {
-    // Layout,
+    Layout,
   },
 });
 </script>

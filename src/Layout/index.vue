@@ -2,19 +2,15 @@
   <div class="layout">
     <Menu></Menu>
     <Header></Header>
-    <v-main>
-      <v-container fluid>
-        <v-row align="center" justify="center">
-          <v-col cols="10">
-            <v-card class="center-card"></v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-
-    <v-footer :inset="footer.true" app>
-      <span class="px-4">&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+    <v-card class="layout-content">
+      <div class="locale-changer">
+        <select v-model="$i18n.locale" class="select">
+          <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
+            {{ lang }}
+          </option>
+        </select>
+      </div>
+    </v-card>
   </div>
 </template>
 
@@ -27,7 +23,11 @@ export default {
     footer: {
       inset: false,
     },
+    langs: ["ja", "en"],
   }),
+  mounted() {
+    console.log("$i18n.locale", this.$i18n.locale);
+  },
   computed: {},
   watch: {},
   components: {
@@ -41,14 +41,17 @@ export default {
 .layout {
   display: flex;
   min-width: 1200px;
+  width: 100%;
   height: 100%;
   flex-direction: row;
 }
 .layout-content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  width: 900px;
+  width: 100%;
+  height: calc(100% - 64px);
+  margin-top: 64px;
+  background-color: #fafcff;
+  box-sizing: border-box;
+  padding: 20px;
 }
 .layout-content-header {
   position: relative;
@@ -77,5 +80,13 @@ export default {
 .center-card {
   width: 100%;
   height: 100%;
+  padding: 20px;
+  /* background-color: #fafcff; */
+  background-color: #f99;
+}
+.locale-changer,
+.select {
+  height: 60px;
+  width: 80px;
 }
 </style>
