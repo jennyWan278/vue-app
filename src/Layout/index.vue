@@ -2,15 +2,7 @@
   <div class="layout">
     <Menu></Menu>
     <Header></Header>
-    <v-card class="layout-content">
-      <div class="locale-changer">
-        <select v-model="$i18n.locale" class="select">
-          <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
-            {{ lang }}
-          </option>
-        </select>
-      </div>
-    </v-card>
+    <v-card class="layout-content"> modulename {{ $t("test") }} </v-card>
   </div>
 </template>
 
@@ -23,7 +15,6 @@ export default {
     footer: {
       inset: false,
     },
-    langs: ["ja", "en"],
   }),
   mounted() {
     console.log("$i18n.locale", this.$i18n.locale);
