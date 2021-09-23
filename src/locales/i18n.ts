@@ -29,7 +29,7 @@ function loadLocaleMessages() {
 }
 
 export default new VueI18n({
-  locale: process.env.VUE_APP_I18N_LOCALE || "cn",
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || "cn",
+  locale: "cn",
+  fallbackLocale: "cn", // 使用fallbackLocale：'<lang>'选择首选语言缺少翻译时要使用的语言。
   messages: loadLocaleMessages(),
 });
