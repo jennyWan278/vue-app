@@ -32,7 +32,10 @@
 
           <v-list-item v-for="subItem in item.items" :key="subItem.title">
             <v-list-item-content>
-              <v-list-item-title v-text="subItem.title"></v-list-item-title>
+              <v-list-item-title
+                v-text="subItem.title"
+                @click="() => toPage(subItem.path)"
+              ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
@@ -45,6 +48,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 type Titems = {
   title: string;
+  path: string;
 };
 type Titem = {
   action: string;
@@ -61,16 +65,15 @@ export default class Test extends Vue {
     {
       action: "mdi-beach",
       title: "Attractions",
-      items: [{ title: "List Item" }],
+      items: [{ title: "Login", path: "login" }],
     },
     {
       action: "mdi-bike-fast",
       title: "Dining",
       active: true,
       items: [
-        { title: "Breakfast & brunch" },
-        { title: "New American" },
-        { title: "Sushi" },
+        { title: "About", path: "about" },
+        { title: "Info", path: "info" },
       ],
     },
   ];
@@ -99,6 +102,10 @@ export default class Test extends Vue {
   private trimAll(value: string): string {
     return value.replace(" ", "");
   }
+  public toPage(path: string): void {
+    this.$router.push(path);
+  }
+
   // @Prop({ default: [] }) private itemArr!: Array<{
   //   key: string;
   //   value: string;

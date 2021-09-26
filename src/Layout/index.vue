@@ -2,7 +2,10 @@
   <div class="layout">
     <Menu></Menu>
     <Header></Header>
-    <v-card class="layout-content"> modulename {{ $t("test") }} </v-card>
+    <v-card class="layout-content">
+      modulename {{ $t("test") }}
+      <router-view />
+    </v-card>
   </div>
 </template>
 
