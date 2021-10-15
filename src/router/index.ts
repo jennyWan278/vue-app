@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   // 登录
   {
-    path: "/login",
+    path: "/login/:id",
     name: "login",
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/Login.vue"),
