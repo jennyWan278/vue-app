@@ -1,16 +1,21 @@
 import Vue from "vue";
-import Vuex from "vuex";
-// import user from "./user";
-
+import Vuex, { StoreOptions } from "vuex";
+import { RootState } from "./types";
+import modules from "./modules";
+import { actions } from "./actions";
+import { getters } from "./getters";
+import { mutations } from "./mutations";
 Vue.use(Vuex);
 
-// interface State {
-//   user: typeof user.state;
-// }
-
-// type GettersFunscs = typeof user.getters;
-export default new Vuex.Store({
-  modules: {
-    // user,
+console.log("actions", actions);
+const store: StoreOptions<RootState> = {
+  state: {
+    version: "xzl",
+    token: "",
   },
-});
+  actions,
+  getters,
+  mutations,
+  modules,
+};
+export default new Vuex.Store<RootState>(store);

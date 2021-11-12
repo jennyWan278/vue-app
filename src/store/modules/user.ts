@@ -1,45 +1,47 @@
-import { Commit, GetterTree, Getter, ActionContext } from "vuex";
+import { Module, ActionTree, MutationTree, GetterTree } from "vuex";
+import { RootState } from "../types";
+import { UserState } from "./types/userStoreType"; //定义state里面值的类型
 
-const state = {
+const state: UserState = {
   userName: localStorage.userName || "",
   token: localStorage.token || "",
   userId: localStorage.userId || "",
 };
-export type State = typeof state;
 
-const getters = {
-  isLogin: (state: State) => !!state.token,
+const getters: GetterTree<UserState, RootState> = {
+  isLogin: (state): boolean => !!state.token,
 };
 
-const mutations = {
-  updateState(state: State, newState: State) {
+const mutations: MutationTree<UserState> = {
+  updateState(state: UserState, newState) {
     Object.assign(state, newState);
   },
 };
-const actions = {
-  updateState(context: { commit: Commit; state: State }, newState: State) {
-    context.commit("updateState", newState);
+const actions: ActionTree<UserState, RootState> = {
+  updateState({ commit }, params) {
+    commit("updateState", params);
   },
-  saveLoginInfo(
-    { commit }: { commit: Commit },
-    { userName, token, userId }: State
-  ) {
+  saveLoginInfo({ commit }, { userName, token, userId }) {
     localStorage.userName = userName;
     localStorage.token = token;
     localStorage.userId = userId;
     commit("updateState", { userName, token, userId });
   },
-  removeLoginInfo({ commit }: { commit: Commit }) {
+  removeLoginInfo({ commit }) {
     localStorage.removeItem("token");
     commit("updateState", {
       token: "",
     });
   },
 };
-export default {
-  namespaced: true,
+
+const namespaced = true;
+const user: Module<UserState, RootState> = {
+  namespaced,
   state,
   mutations,
   getters,
   actions,
 };
+export default user;
+export type User = typeof user;

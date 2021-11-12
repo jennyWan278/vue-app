@@ -9,27 +9,38 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Header from "@/Layout/Header/index.vue";
 import Menu from "@/Layout/Menu/index.vue";
-
-export default {
-  data: () => ({
-    footer: {
-      inset: false,
-    },
-  }),
-  mounted() {
-    console.log("$i18n.locale", this.$i18n.locale);
-  },
-  computed: {},
-  watch: {},
+import { Vue, Component, Watch } from "vue-property-decorator";
+import { State, Getter, Action, Mutation } from "vuex-class";
+import { UserState } from "@/store/modules/types/userStoreType";
+// import { token } from "../store/getters";
+// const user = namespace("user");
+const namespace = "user";
+@Component({
   components: {
     Menu,
     Header,
   },
-  methods: {},
-};
+  filters: {},
+})
+export default class Login extends Vue {
+  @State("token") public token: any;
+  @State("user") public userStore: any;
+  @Action("saveLoginInfo") public saveLoginInfo: any;
+  @Mutation("updateState") public updateState: any;
+  public footer: any = {
+    inset: false,
+  };
+  mounted() {
+    const params = {
+      token: "djie",
+    };
+    this.saveLoginInfo(params);
+    console.log("token", this.token);
+  }
+}
 </script>
 <style scoped>
 .layout {

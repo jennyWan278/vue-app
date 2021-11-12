@@ -2,7 +2,7 @@ import colors from "vuetify/es5/util/colors";
 
 export default {
   light: {
-    primary: "#4D6BFD",
+    primary: "#8FC2FB",
     secondary: colors.blue.lighten4,
     accent: colors.blue.base,
   },
