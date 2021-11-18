@@ -11,7 +11,8 @@
 </template>
 
 <script>
-export default {
+import Vue from 'vue'
+export default Vue.extend({
   data() {
     return {
       langs: ["ja", "en"],
@@ -20,7 +21,7 @@ export default {
   computed: {},
   watch: {},
   methods: {},
-};
+});
 </script>
 <style lang="scss">
 .memu {

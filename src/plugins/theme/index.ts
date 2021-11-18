@@ -2,7 +2,6 @@ import _ from "lodash";
 import color, { Tmix } from "./mix";
 type Tcolor = "blue" | "green";
 type Ttheme = "blue" | "green";
-type Titem = "light" | "dark";
 class PropertyUtil {
   public vuetify;
   public colorObj: Tmix;
@@ -25,10 +24,7 @@ class PropertyUtil {
     if (this.vuetify) {
       // item: 'light'|'dark'
       Object.keys(this.colorObj[val]).forEach((item) => {
-        this.vuetify.framework.theme.setTheme(
-          item,
-          (this.colorObj as any)[val][item]
-        );
+        this.vuetify.framework.theme.setTheme(item, this.colorObj[val][item]);
       });
     }
   }

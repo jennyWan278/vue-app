@@ -5,4 +5,20 @@ const mix = {
   blue,
 };
 export default mix;
-export type Tmix = typeof mix;
+
+type Tcolors = {
+  [key: string]: string;
+  primary: string;
+  secondary: string;
+  accent: string;
+};
+export type Tcolor = {
+  [key: string]: Tcolors;
+  light: Tcolors;
+  dark: Tcolors;
+};
+export type Tmix = {
+  [key: string]: Tcolor;
+  green: Tcolor;
+  blue: Tcolor;
+};
