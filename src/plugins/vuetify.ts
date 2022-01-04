@@ -33,7 +33,7 @@ const myVuetify = new Vuetify({
 
 Vue.use(Theme, {
   vuetify: myVuetify,
-  theme: "light",
+  theme: "green",
 });
 
 export default myVuetify;
